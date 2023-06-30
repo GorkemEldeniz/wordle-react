@@ -3,9 +3,12 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './style/reset.css'
 import './style/global.css'
+import GameContextProvider from './Context/GameContext.tsx'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <App />
+    <GameContextProvider>
+      <App />
+    </GameContextProvider>
   </React.StrictMode>,
 )

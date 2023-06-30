@@ -1,0 +1,29 @@
+.board {
+  width: fit-content;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.cell {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  text-align: center;
+  line-height: 2rem;
+  font-weight: bold;
+  color: #d7dadc;
+  caret-color: transparent;
+  text-transform: uppercase;
+  border: 2px solid #3a3a3c;
+  background-color: #121213;
+}
