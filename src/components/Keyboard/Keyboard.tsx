@@ -8,13 +8,11 @@ const alphapet = ['E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'Ğ', 'Ü', 'A', 'S', 
 function Keyboard() {
 
   const { boardArray, setBoardArray, setCol, setRow, row, col } = useContext(Context);
-  const [letter, setLetter] = useState('');
-
 
   // ufak buglar var düzeltilecek...
   const handleClick = (L: string) => {
     if (L === 'Delete' && col > -1) {
-      setCol(pre => pre == 0 ? 0 : pre - 1);
+      setCol((pre: number) => pre == 0 ? 0 : pre - 1);
       setBoardArray((oldBoardArray: string[][]) => {
         return oldBoardArray.map((ROW, row_idx) => {
           if (row_idx == row) {
@@ -40,7 +38,7 @@ function Keyboard() {
           return ROW
         })
       })
-      if (col < 5) setCol(pre => pre + 1);
+      if (col < 5) setCol((pre: number) => pre + 1);
     }
   }
 
