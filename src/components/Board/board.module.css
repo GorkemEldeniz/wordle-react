@@ -27,3 +27,15 @@
   border: 2px solid #3a3a3c;
   background-color: #121213;
 }
+
+.present {
+  background-color: #b59f3b;
+}
+
+.correct {
+  background-color: #538d4e;
+}
+
+.absent {
+  background-color: #3a3a3c;
+}
