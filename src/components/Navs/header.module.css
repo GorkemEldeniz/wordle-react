@@ -8,7 +8,9 @@
 
 header {
   text-align: center;
-  position: relative;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-49%);
 }
 
 header>h1 {

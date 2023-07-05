@@ -1,11 +1,11 @@
 import styles from './board.module.css';
-import { Context } from '../../Context/GameContext';
+import { GameContext } from '../../Context/Context';
 import { useContext } from 'react';
-import type { Board } from '../../Context/GameContext';
+import type { Board } from '../../Context/Context';
 
 function Board() {
 
-  const { boardArray } = useContext(Context);
+  const { boardArray } = useContext(GameContext);
 
   return (
     <div className={styles.board}>

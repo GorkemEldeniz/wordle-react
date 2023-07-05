@@ -1,14 +1,14 @@
 .board {
   width: fit-content;
-  margin: 2rem auto;
+  margin: 1rem auto;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 5px;
 }
 
 .row {
   display: flex;
-  gap: 0.5rem;
+  gap: 5px;
 }
 
 .cell {

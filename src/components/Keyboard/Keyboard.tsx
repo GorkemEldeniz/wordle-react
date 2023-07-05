@@ -1,14 +1,14 @@
 import styles from './keyboard.module.css';
-import { Context } from '../../Context/GameContext';
+import { GameContext } from '../../Context/Context';
 import { useContext, useEffect, useState } from 'react';
-import type { Board } from '../../Context/GameContext';
+import type { Board } from '../../Context/Context';
 
 
 const alphapet = ['E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'Ğ', 'Ü', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ş', 'İ', 'Enter', 'Z', 'C', 'V', 'B', 'N', 'M', 'Ö', 'Ç', 'Delete'];
 
 function Keyboard() {
 
-  const { setBoardArray, boardArray, gameState, setGameState } = useContext(Context);
+  const { setBoardArray, boardArray, gameState, setGameState } = useContext(GameContext);
   const [row, setRow] = useState(0);
   const [word, setWord] = useState<any[]>([]);
 

@@ -1,7 +1,7 @@
 import { createContext, useMemo, useState } from "react";
 import type { ReactElement } from "react";
 
-export const Context = createContext<any>(undefined);
+export const GameContext = createContext<any>(undefined);
 
 export type Board = {
   letter: string
@@ -14,7 +14,7 @@ export type Game = {
   isFinished: boolean
 }
 
-function GameContextProvider({ children }: { children: ReactElement }) {
+function ContextProvider({ children }: { children: ReactElement }) {
 
   const [boardArray, setBoardArray] = useState<Board[][]>(new Array(6).fill('').map(() => new Array(5).fill({
     letter: '',
@@ -30,7 +30,7 @@ function GameContextProvider({ children }: { children: ReactElement }) {
 
   const data = useMemo(() => ({ boardArray, setBoardArray, gameState, setGameState }), [setBoardArray, boardArray, setGameState, gameState]);
 
-  return <Context.Provider value={data}>{children}</Context.Provider>
+  return <GameContext.Provider value={data}>{children}</GameContext.Provider>
 }
 
-export default GameContextProvider;
+export default ContextProvider;
