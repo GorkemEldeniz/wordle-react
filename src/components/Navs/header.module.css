@@ -34,3 +34,9 @@ nav ol li>button {
   cursor: pointer;
   padding: 8px 15px 0px 0px
 }
+
+.name {
+  position: fixed;
+  left: 4rem;
+  color: var(--white);
+}

@@ -3,6 +3,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useRegisterMutation } from "../../app/services/api";
 import { useUserStore } from "../../app/store";
+import styles from './LoginRegister.module.css';
+import Loader from "../../components/Loader/Loader";
+import { toast } from "react-hot-toast";
+import type { Toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 export type Inputs = {
   username: string
@@ -34,7 +39,18 @@ function Register() {
       // register user to state management
       registerUser(response);
     } catch (serverErrors: any) {
-      if (Array.isArray(serverErrors.data.errors)) {
+      if (serverErrors.status === 500) {
+        toast((t: Toast) => (
+          <div className={styles.toaster}>
+            <span>😵{' '}😵{' '}😵</span>
+            <br />
+            Sunucu hatası daha sonra tekrar deneyiniz!!
+            <br />
+            <button className={styles.close} onClick={() => toast.dismiss(t.id)}>Kapat</button>
+          </div>
+        ))
+      }
+      else if (serverErrors.status === 400) {
         serverErrors.data.errors.map((err: ServerError) => {
           const { type, message } = err;
           setError(type, {
@@ -46,24 +62,22 @@ function Register() {
     }
   }
 
-  if (isLoading) return <div>Loading..</div>
+  if (isLoading) return <div className={styles.wrapper}><Loader /></div>
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="">Username</label>
-      <br />
-      <input type="text" placeholder="username" {...register("username")} />
-      <br />
-      <p style={{ color: 'red', fontSize: '1rem' }}>{errors.username?.message}</p>
-      <br />
-      <label htmlFor="">Password</label>
-      <br />
-      <input type="password" placeholder="password" {...register("password", { required: true })} />
-      <br />
-      <p style={{ color: 'red', fontSize: '1rem' }}>{errors.password?.message}</p>
-      <br />
-      <button type="submit">Submit</button>
-    </form>
+    <div className={styles.wrapper}>
+      <h2>Kayıt</h2>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="">Kullanıcı Adı</label>
+        <input autoComplete="off" type="text" placeholder="Kullanıcı Adı" {...register("username")} />
+        <p style={{ color: 'red', fontSize: '1rem' }}>{errors.username?.message}</p>
+        <label htmlFor="">Şifre</label>
+        <input type="password" placeholder="Şifre" {...register("password", { required: true })} />
+        <p style={{ color: 'red', fontSize: '1rem' }}>{errors.password?.message}</p>
+        <button type="submit">Kayıt Ol</button>
+        <div>Üye Misiniz? <Link to='login'>Giriş Yap</Link></div>
+      </form>
+    </div>
   );
 }
 

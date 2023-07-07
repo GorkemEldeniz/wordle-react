@@ -1,0 +1,9 @@
+.logout {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 0.3rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}

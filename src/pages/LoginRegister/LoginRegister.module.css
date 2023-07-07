@@ -1,0 +1,56 @@
+.wrapper {
+  align-self: center;
+  width: min(500px, 50%);
+  margin: 2rem auto;
+  color: var(--white);
+  text-align: center;
+}
+
+.form {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--white);
+  margin-top: 1rem;
+}
+
+.form>* {
+  padding: 0.3rem 0;
+}
+
+.form>input {
+  background-color: #121213;
+  border: none;
+  border-bottom: 1px solid var(--white);
+  outline: none;
+  color: var(--white);
+}
+
+/* .toaster {
+  background-color: #fff;
+  color: #121213;
+  border-radius: 0.4rem;
+  padding: 0.7rem;
+} */
+
+form>button {
+  cursor: pointer;
+}
+
+form a {
+  text-decoration: none;
+  color: var(--darkendGreen)
+}
+
+.close {
+  border: none;
+  padding: 0.5rem;
+  background-color: #121213;
+  color: var(--white);
+  border-radius: 0.2rem;
+  margin: 0.5rem auto;
+  width: 100%;
+  z-index: 999;
+  cursor: pointer;
+}

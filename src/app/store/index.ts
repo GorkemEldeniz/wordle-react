@@ -9,4 +9,8 @@ export const useUserStore = create((set) => ({
     localStorage.setItem('user',JSON.stringify(payload))
     return { user:{...payload}  }
   }),
+  logOut: () => set(() => {
+    localStorage.removeItem('user')
+    return { user:'false' }
+  }),
 }))
