@@ -31,6 +31,7 @@ function Login() {
       // register user
       registerUser(response);
     } catch (serverErrors: any) {
+      console.log(serverErrors)
       if (serverErrors.status === 500) {
         toast((t: Toast) => (
           <div className={styles.toaster}>
@@ -42,7 +43,7 @@ function Login() {
           </div>
         ))
       }
-      else if (serverErrors.status === 400) {
+      else if (serverErrors.status === 400 && Array.isArray(serverErrors.data.errors)) {
         serverErrors.data.errors.map((err: ServerError) => {
           const { type, message } = err;
           setError(type, {
