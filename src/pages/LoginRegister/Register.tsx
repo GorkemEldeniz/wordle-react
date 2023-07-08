@@ -1,6 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
 import { useRegisterMutation } from "../../app/services/api";
 import { useUserStore } from "../../app/store";
 import styles from './LoginRegister.module.css';
@@ -8,6 +7,7 @@ import Loader from "../../components/Loader/Loader";
 import { toast } from "react-hot-toast";
 import type { Toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { schema } from "../../utils";
 
 export type Inputs = {
   username: string
@@ -18,11 +18,6 @@ export type ServerError = {
   type: 'username' | 'password'
   message: string
 }
-
-const schema = yup.object({
-  username: yup.string().min(2).max(20).required(),
-  password: yup.string().min(2).max(20).required(),
-}).required();
 
 function Register() {
   const { register, handleSubmit, formState: { errors }, setError } = useForm<Inputs>({
