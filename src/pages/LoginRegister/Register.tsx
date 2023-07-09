@@ -30,7 +30,8 @@ function Register() {
       // register user to state management
       registerUser(response);
     } catch (serverErrors: FetchError | any) {
-      if (serverErrors.status === 500) {
+      console.log(serverErrors)
+      if (serverErrors.status === 500 || serverErrors.status === 'FETCH_ERROR') {
         toast((t: Toast) => (
           <div className={styles.toaster}>
             <span>😵{' '}😵{' '}😵</span>
