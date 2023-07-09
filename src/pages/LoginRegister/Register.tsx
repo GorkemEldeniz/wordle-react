@@ -8,16 +8,12 @@ import { toast } from "react-hot-toast";
 import type { Toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { schema } from "../../utils";
+import { FetchError } from "../../types";
 
 export type Inputs = {
   username: string
   password: string
 };
-
-export type ServerError = {
-  type: 'username' | 'password'
-  message: string
-}
 
 function Register() {
   const { register, handleSubmit, formState: { errors }, setError } = useForm<Inputs>({
@@ -33,7 +29,7 @@ function Register() {
       const response = await updatePost(data).unwrap();
       // register user to state management
       registerUser(response);
-    } catch (serverErrors: any) {
+    } catch (serverErrors: FetchError | any) {
       if (serverErrors.status === 500) {
         toast((t: Toast) => (
           <div className={styles.toaster}>
@@ -46,7 +42,7 @@ function Register() {
         ))
       }
       else if (serverErrors.status === 400) {
-        serverErrors.data.errors.map((err: ServerError) => {
+        serverErrors.data.errors.map((err: any) => {
           const { type, message } = err;
           setError(type, {
             type: 'manuel',

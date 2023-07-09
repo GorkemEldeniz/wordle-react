@@ -2,6 +2,7 @@ import styles from './keyboard.module.css';
 import { GameContext } from '../../Context/Context';
 import { useContext, useEffect, useState } from 'react';
 import type { Board } from '../../Context/Context';
+//import { useUserStore } from '../../app/store';
 
 
 const alphapet = ['E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'Ğ', 'Ü', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ş', 'İ', 'Enter', 'Z', 'C', 'V', 'B', 'N', 'M', 'Ö', 'Ç', 'Delete'];
@@ -11,9 +12,10 @@ function Keyboard() {
   const { setBoardArray, boardArray, gameState, setGameState } = useContext(GameContext);
   const [row, setRow] = useState(0);
   const [word, setWord] = useState<any[]>([]);
+  //const { id, username } = useUserStore((state: any) => state.user);
 
   // ufak buglar var düzeltilecek...
-  const handleClick = (L: string) => {
+  const handleClick = async (L: string) => {
 
     if (L === 'Delete') {
       setWord(oldWord => {
@@ -92,6 +94,15 @@ function Keyboard() {
           isFinished: true,
           result: boardArray
         })
+        // let res = await fetch('http://localhost:3001/score', {
+        //   method: 'POST',
+        //   body: JSON.stringify({
+        //     id,
+        //     score: 40,
+        //     result: JSON.stringify(resultArray)
+        //   })
+        // })
+        // res = await res.json();
       }
 
       setRow(row + 1);

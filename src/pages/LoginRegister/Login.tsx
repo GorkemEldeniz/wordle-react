@@ -3,13 +3,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useLoginMutation } from "../../app/services/api";
 import { useUserStore } from "../../app/store";
 import type { Inputs } from "./Register";
-import type { ServerError } from "./Register";
 import styles from './LoginRegister.module.css';
 import Loader from "../../components/Loader/Loader";
 import { toast } from 'react-hot-toast'
 import type { Toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { schema } from "../../utils";
+import type { FetchError } from "../../types";
 
 
 function Login() {
@@ -19,15 +19,15 @@ function Login() {
 
   const registerUser = useUserStore((state: any) => state.registerUser);
 
-  const [updatePost, { isLoading }] = useLoginMutation()
+  const [login, { isLoading }] = useLoginMutation()
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-      const response = await updatePost(data).unwrap();
+      const response = await login(data).unwrap();
       // register user
       registerUser(response);
-    } catch (serverErrors: any) {
-      if (serverErrors.status === 500) {
+    } catch (serverErrors: FetchError | any) {
+      if (serverErrors.status === 500 || serverErrors.status === 'FETCH_ERROR') {
         toast((t: Toast) => (
           <div className={styles.toaster}>
             <span>😵{' '}😵{' '}😵</span>
@@ -39,7 +39,7 @@ function Login() {
         ))
       }
       else if (serverErrors.status === 400 && Array.isArray(serverErrors.data.errors)) {
-        serverErrors.data.errors.map((err: ServerError) => {
+        serverErrors.data.errors.map((err: any) => {
           const { type, message } = err;
           setError(type, {
             type: 'manuel',
